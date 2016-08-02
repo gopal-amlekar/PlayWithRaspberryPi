@@ -1,0 +1,11 @@
+# To schedule a job repetitively, use crontab -e. This opens up the crontab in edit mode.
+
+# Each task to run has to be defined through a single line indicating with different fields when the task will be run and what command to run for the task
+# To define the time you can provide concrete values for minute (m), hour (h), day of month (dom), month (mon), and day of week (dow) or use '*' in these fields (for 'any').# 
+# Output of the crontab jobs (including errors) is sent through email to the user the crontab file belongs to (unless redirected).
+# Use this MAILTO=username@domain.com in the crontab file. (With some changes, separate email address can also be specified for separate tasks.
+# For example, you can run a backup of all your user accounts at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+# m h  dom mon dow   command
+
+# To see log of crontab, see the file /var/log/syslog. You can run GREP to see cron jobs run - GREP CRON /var/log/syslog
