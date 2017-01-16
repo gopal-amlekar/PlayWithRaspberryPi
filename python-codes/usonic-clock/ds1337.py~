@@ -1,0 +1,56 @@
+import smbus
+import time
+import datetime
+
+address = 0x68
+
+# Define all the registers
+SECONDS = 0x00
+MINUTES = 0x01
+HOURS = 0x02
+DAY = 0x03
+DATE = 0x04
+MONTH = 0x05
+YEAR = 0x06
+
+CONTROL = 0x0E
+STATUS = 0x0F
+
+
+bus = smbus.SMBus(0) # Change to 0 for revision 1 Raspberry Pi
+
+
+now = datetime.datetime.now()
+prevsec = 255
+
+bus.write_byte_data(address, SECONDS, 0x12)
+bus.write_byte_data(address, MINUTES, 0x13)
+bus.write_byte_data(address, HOURS, 0x42)
+
+while True:
+    sec = bus.read_byte_data(address, SECONDS)
+    mints = bus.read_byte_data(address, MINUTES)
+    hrs = bus.read_byte_data(address, HOURS)
+    
+    sec_data = ( ( (sec & 0xF0) >> 4 )*10) + (sec & 0x0F)
+    min_data = ( ( (mints & 0xF0) >> 4 )*10) + (mints & 0x0F)
+    hrs_data = ( ( (hrs & 0x30) >> 4 ) *10) + (hrs & 0x0F)
+    
+    if (sec_data != prevsec):
+        print str(hrs_data) + ":" + str(min_data) + ":" + str(sec_data)
+        prevsec = sec_data
+
+
+# Set IODIR as OUTPUT
+#bus.write_byte_data(address, IODIR, 0b00000000)
+
+# Reset all the other registers
+#for reg in [IPOL,GPINTEN,DEFVAL,INTCON,IOCON,GPPU,INTF,INTCAP,GPIO,OLAT]:
+#    bus.write_byte_data(address, reg, 0b00000000)
+
+#while True:
+#    bus.write_byte_data(address, GPIO, 0xFF)
+#    time.sleep(1)
+#    bus.write_byte_data(address, GPIO, 0x00)
+#    time.sleep(1)
+
