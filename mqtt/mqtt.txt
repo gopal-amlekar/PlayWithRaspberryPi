@@ -1,0 +1,15 @@
+Just followed the tutorial on following link:
+https://www.baldengineer.com/mqtt-tutorial.html
+
+Did work well with the raspberry pi acting as server. Used Linux another machine as one more node and called the mqtt sub mqtt pub 
+commands to pass on text messages.
+
+I think the pubnub is more promising so instead of spending time on basic mqtt, I will go to pubnub.
+
+Using mqtt in actual product needs your own server with all the protection, hackproofing etc.
+
+Note: the following link by Nayan have some more information as well.
+https://www.evernote.com/pub/nayaneye/iraspberrypi-meetup#st=p&x=mqtt&n=86c290a1-dc44-49d5-8ba4-4a069a79b0d1
+
+Found some more:
+http://www.hivemq.com/blog/how-to-get-started-with-mqtt
